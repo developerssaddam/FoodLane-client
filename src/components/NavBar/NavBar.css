@@ -1,0 +1,19 @@
+#menu {
+  z-index: 999;
+}
+
+#menu li{
+  color: #fff;
+}
+
+#menu li a.active {
+  background-color: #363062;
+}
+
+#dropdown {
+  top: -999px !important;
+}
+
+#profile-info:hover #dropdown {
+  top: 30px !important;
+}
