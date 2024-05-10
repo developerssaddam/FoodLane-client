@@ -2,10 +2,14 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../providers/AuthProviders";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(true);
+
+  const { name } = useContext(AuthContext);
+  console.log(name);
 
   // handleShowHidePassword
   const handleShowHidePassword = () => {
