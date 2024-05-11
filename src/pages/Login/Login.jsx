@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { useState } from "react";
@@ -8,23 +8,14 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(true);
-  const { user, loading, loginUser, loginWithGoogle, loginWithGithub } =
-    useAuthHooks();
+  const { loginUser, loginWithGoogle, loginWithGithub } = useAuthHooks();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // handleShowHidePassword
   const handleShowHidePassword = () => {
     setShowPassword(!showPassword);
   };
-
-  // if LoginUser
-  if (loading) {
-    return;
-  }
-
-  if (user) {
-    return <Navigate to="/"></Navigate>;
-  }
 
   // handleLoginUser
   const handleLoginUser = (e) => {
@@ -41,8 +32,20 @@ const Login = () => {
     loginUser(email, password)
       .then(() => {
         toast.success("Login successfull!");
-        navigate("/");
+        location?.state ? navigate(location.state) : navigate("/");
         form.reset();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
+  // Social Login.
+  const socialLogin = (loginMethods) => {
+    loginMethods()
+      .then(() => {
+        toast.success("Login successfull!");
+        location?.state ? navigate(location.state) : navigate("/");
       })
       .catch((error) => {
         toast.error(error.message);
@@ -51,24 +54,12 @@ const Login = () => {
 
   // Login With Google
   const handleLoginWithGoogle = () => {
-    loginWithGoogle()
-      .then(() => {
-        toast.success("Login successfull!");
-      })
-      .catch((error) => {
-        toast.success(error.message);
-      });
+    socialLogin(loginWithGoogle);
   };
 
   // LoginWithGitHub
   const signInWithGithub = () => {
-    loginWithGithub()
-      .then(() => {
-        toast.success("Login successfull!");
-      })
-      .catch((error) => {
-        toast.success(error.message);
-      });
+    socialLogin(loginWithGithub);
   };
 
   return (

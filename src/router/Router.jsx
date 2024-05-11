@@ -10,6 +10,7 @@ import SingleFood from "../pages/SingleFood/SingleFood";
 import PurchaseFood from "../pages/PurchaseFood/PurchaseFood";
 import AddFoodItem from "../pages/AddFoodItem/AddFoodItem";
 import MyPurchaseList from "../pages/MyPurchaseList/MyPurchaseList";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/allfoods",
-        element: <AllFoods />,
+        element: (
+          <ProtectedRoute>
+            <AllFoods />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/gallery",
