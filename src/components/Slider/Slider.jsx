@@ -38,7 +38,7 @@ const Slider = () => {
           <div
             className="hero h-[600px]"
             style={{
-              backgroundImage: "url(https://i.ibb.co/2ybRZ1d/1.jpg)",
+              backgroundImage: "url(https://i.ibb.co/510nzqn/33.jpg)",
             }}
           >
             <div className="hero-overlay bg-opacity-40"></div>
@@ -66,7 +66,7 @@ const Slider = () => {
           <div
             className="hero h-[600px]"
             style={{
-              backgroundImage: "url(https://i.ibb.co/7vNYyGN/2.jpg)",
+              backgroundImage: "url(https://i.ibb.co/d0NPpB8/22.jpg)",
             }}
           >
             <div className="hero-overlay bg-opacity-40"></div>

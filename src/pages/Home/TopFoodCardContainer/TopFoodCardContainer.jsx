@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import TopFoodCard from "../../../components/TopFoodCard/TopFoodCard";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const TopFoodCardContainer = () => {
   return (
@@ -19,6 +21,21 @@ const TopFoodCardContainer = () => {
         <TopFoodCard />
         <TopFoodCard />
         <TopFoodCard />
+      </div>
+
+      <div className="flex justify-center mt-12">
+        <Link
+          to="/allfoods"
+          className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
+        >
+          <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-[#4D4C7D] group-hover:translate-x-0 ease">
+            <FaArrowRightLong />
+          </span>
+          <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
+            See-All
+          </span>
+          <span className="relative invisible">Button Text</span>
+        </Link>
       </div>
     </div>
   );
