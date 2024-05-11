@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import Slider from "../../components/Slider/Slider";
+import TopFoodCardContainer from "./TopFoodCardContainer/TopFoodCardContainer";
 
 const Home = () => {
   return (
@@ -8,7 +10,8 @@ const Home = () => {
       </Helmet>
 
       <div>
-        <h1>Home</h1>
+        <Slider />
+        <TopFoodCardContainer />
       </div>
     </div>
   );

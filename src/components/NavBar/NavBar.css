@@ -2,7 +2,11 @@
   z-index: 999;
 }
 
-#menu li{
+.dropdown #menu{
+  background-color: #535287;
+}
+
+#menu li {
   color: #fff;
 }
 
