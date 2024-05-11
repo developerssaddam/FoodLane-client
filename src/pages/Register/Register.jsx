@@ -1,18 +1,65 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { updateProfile } from "firebase/auth";
+import useAuthHooks from "../../hooks/useAuthHooks";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(true);
+  const { createUser } = useAuthHooks();
+  const passCheck = /(?=.*[A-Z])(?=.*[a-z]){6,}/;
+  const navigate = useNavigate();
 
   // handleShowHidePassword
   const handleShowHidePassword = () => {
     setShowPassword(!showPassword);
   };
 
-  
+  // handleCreateUser
+  const handleCreateUser = (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const photo = form.photo.value;
+    const password = form.password.value;
+
+    // form validation
+    if (!name || !email || !photo || !password) {
+      return toast.error("All fields are required!");
+    }
+
+    // password validation
+    if (!passCheck.test(password)) {
+      return toast.warn(
+        "Password must be at least six character with lowercase and uppercase letter!"
+      );
+    }
+
+    // Create user
+    createUser(email, password)
+      .then((result) => {
+        updateProfile(result.user, {
+          displayName: name,
+          photoURL: photo,
+        })
+          .then(() => {
+            toast.success("User registration successfull!");
+          })
+          .catch((error) => {
+            toast.error(error.message);
+          });
+        form.reset();
+        navigate("/login");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div>
@@ -23,7 +70,7 @@ const Register = () => {
       <div className="my-8 flex justify-center">
         <div className="w-full max-w-md p-8 space-y-3 rounded-xl border shadow-md">
           <h1 className="text-2xl font-bold text-center">Register</h1>
-          <form noValidate="" action="" className="space-y-6">
+          <form onSubmit={handleCreateUser} className="space-y-6">
             <div className="space-y-1 text-sm">
               <label className="block text-gray-600">Name</label>
               <input
