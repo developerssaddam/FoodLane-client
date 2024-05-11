@@ -48,15 +48,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/food/buy",
-        element: <PurchaseFood />,
+        element: (
+          <ProtectedRoute>
+            <PurchaseFood />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/food/add",
-        element: <AddFoodItem />,
+        element: (
+          <ProtectedRoute>
+            <AddFoodItem />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/mylist",
-        element: <MyPurchaseList />,
+        element: (
+          <ProtectedRoute>
+            <MyPurchaseList />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
