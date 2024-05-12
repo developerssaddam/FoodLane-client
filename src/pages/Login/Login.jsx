@@ -5,12 +5,14 @@ import { IoEyeOutline } from "react-icons/io5";
 import { useState } from "react";
 import useAuthHooks from "../../hooks/useAuthHooks";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(true);
-  const { loginUser, loginWithGoogle, loginWithGithub } = useAuthHooks();
+  const { user, loginUser, loginWithGoogle, loginWithGithub } = useAuthHooks();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosSecure = useAxiosSecure();
 
   // handleShowHidePassword
   const handleShowHidePassword = () => {
@@ -31,9 +33,13 @@ const Login = () => {
     }
     loginUser(email, password)
       .then(() => {
-        toast.success("Login successfull!");
-        location?.state ? navigate(location.state) : navigate("/");
-        form.reset();
+        axiosSecure.post("/user", user).then((res) => {
+          if (res.data.status) {
+            toast.success("Login successfull!");
+            location?.state ? navigate(location.state) : navigate("/");
+            form.reset();
+          }
+        });
       })
       .catch((error) => {
         toast.error(error.message);
@@ -44,8 +50,12 @@ const Login = () => {
   const socialLogin = (loginMethods) => {
     loginMethods()
       .then(() => {
-        toast.success("Login successfull!");
-        location?.state ? navigate(location.state) : navigate("/");
+        axiosSecure.post("/user", user).then((res) => {
+          if (res.data.status) {
+            toast.success("Login successfull!");
+            location?.state ? navigate(location.state) : navigate("/");
+          }
+        });
       })
       .catch((error) => {
         toast.error(error.message);

@@ -2,15 +2,19 @@ import { Link, NavLink } from "react-router-dom";
 import "./NavBar.css";
 import useAuthHooks from "../../hooks/useAuthHooks";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const NavBar = () => {
   const { user, logoutUser } = useAuthHooks();
+  const axiosSecure = useAxiosSecure();
 
   // handleLogoutUser.
   const handleLogoutUser = () => {
     logoutUser()
       .then(() => {
-        toast.success("Sign-out successful");
+        axiosSecure.get("/user/logout").then((res) => {
+          toast.success(res.data.message);
+        });
       })
       .catch((error) => {
         toast.error(error.message);
