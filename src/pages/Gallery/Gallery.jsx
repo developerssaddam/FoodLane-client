@@ -1,6 +1,19 @@
 import { Helmet } from "react-helmet-async";
+import useAuthHooks from "../../hooks/useAuthHooks";
 
 const Gallery = () => {
+  const { user } = useAuthHooks();
+  
+  // handleAddExperience
+  const handleAddExperience = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const feedback = form.feedback.value;
+    const photo = form.photo.value;
+    console.log(name, feedback, photo);
+  };
+
   return (
     <div>
       <Helmet>
@@ -26,6 +39,7 @@ const Gallery = () => {
 
         <div className="search max-w-7xl mx-auto flex justify-end mb-10">
           <button
+            className="btn bg-[#4D4C7D] text-white px-5 btn-sm"
             onClick={() => document.getElementById("my_modal").showModal()}
           >
             ADD
@@ -46,17 +60,21 @@ const Gallery = () => {
             {/* user-input-form */}
             <div>
               <div className="w-full max-w-md p-8 space-y-3 rounded-xl">
-                <h1 className="text-2xl font-bold text-center">Add-Food-experience</h1>
-                <form className="space-y-6">
+                <h1 className="text-2xl font-bold text-center">
+                  Add-Food-experience
+                </h1>
+                <form onSubmit={handleAddExperience} className="space-y-6">
                   <div className="space-y-1 text-sm">
                     <label htmlFor="username" className="block text-gray-400">
                       Username
                     </label>
                     <input
                       type="text"
-                      name="username"
+                      name="name"
+                      defaultValue={user?.displayName}
+                      readOnly
                       placeholder="Username"
-                      className="w-full px-4 py-3 rounded-md border-2 text-gray-100 focus:border-violet-400"
+                      className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
                     />
                   </div>
                   <div className="space-y-1 text-sm">
@@ -67,7 +85,7 @@ const Gallery = () => {
                       type="text"
                       name="feedback"
                       placeholder="Feedback"
-                      className="w-full px-4 py-3 rounded-md border-2 text-gray-100 focus:border-violet-400"
+                      className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
                     />
                   </div>
                   <div className="space-y-1 text-sm">
@@ -78,7 +96,7 @@ const Gallery = () => {
                       type="text"
                       name="photo"
                       placeholder="Photo URL"
-                      className="w-full px-4 py-3 rounded-md border-2 text-gray-100 focus:border-violet-400"
+                      className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
                     />
                   </div>
                   <button
