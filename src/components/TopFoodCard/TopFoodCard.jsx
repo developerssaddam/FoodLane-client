@@ -20,7 +20,7 @@ const TopFoodCard = () => {
           Price : $<span className="font_lobster">120</span>{" "}
         </p>
       </div>
-      <Link>
+      <Link to="/food/1">
         <button className="btn bg-[#4D4C7D] w-full text-white mt-4">
           Details
         </button>

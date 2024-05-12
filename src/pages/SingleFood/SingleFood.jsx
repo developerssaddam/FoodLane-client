@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 const SingleFood = () => {
   return (
@@ -30,15 +31,15 @@ const SingleFood = () => {
             />
           </div>
 
-          <div className="my-10 space-y-3 font_lato">
+          <div className="my-10 space-y-3 font_lato p-2">
             <h2 className="text-2xl font-bold font_lobster">Food Name</h2>
-            <div className="flex justify-between">
+            <div className="flex flex-col md:flex-row gap-4 md:justify-between">
               <h2 className="text-lg font-semibold">Category : Category</h2>
               <p className="text-lg font-semibold">
                 Price : <span className="font_lobster">$120</span>
               </p>
             </div>
-            <div className="flex justify-between">
+            <div className="flex flex-col md:flex-row gap-4 md:justify-between">
               <h2 className="text-lg font-semibold">
                 Made-By : <span>Made by</span>
               </h2>
@@ -54,7 +55,11 @@ const SingleFood = () => {
             </p>
 
             <div className="flex justify-end">
-              <button className="bg-[#4D4C7D] text-white btn px-8">Purchase</button>
+              <Link to="/purchase">
+                <button className="bg-[#4D4C7D] text-white btn px-8">
+                  Purchase
+                </button>
+              </Link>
             </div>
           </div>
         </div>

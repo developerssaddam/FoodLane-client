@@ -7,10 +7,11 @@ import Register from "../pages/Register/Register";
 import AllFoods from "../pages/AllFoods/AllFoods";
 import Gallery from "../pages/Gallery/Gallery";
 import SingleFood from "../pages/SingleFood/SingleFood";
-import PurchaseFood from "../pages/PurchaseFood/PurchaseFood";
 import AddFoodItem from "../pages/AddFoodItem/AddFoodItem";
-import MyPurchaseList from "../pages/MyPurchaseList/MyPurchaseList";
 import ProtectedRoute from "./ProtectedRoute";
+import MyPurchasePage from "../pages/MyPurchasePage/MyPurchasePage";
+import MyAddedFoodItem from "../pages/MyAddedFoodItem/MyAddedFoodItem";
+import FoodPurchaseForm from "../pages/FoodPurchaseForm/FoodPurchaseForm";
 
 const router = createBrowserRouter([
   {
@@ -47,14 +48,6 @@ const router = createBrowserRouter([
         element: <SingleFood />,
       },
       {
-        path: "/food/buy",
-        element: (
-          <ProtectedRoute>
-            <PurchaseFood />
-          </ProtectedRoute>
-        ),
-      },
-      {
         path: "/food/add",
         element: (
           <ProtectedRoute>
@@ -63,10 +56,26 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/mylist",
+        path: "/mypurchaselist",
         element: (
           <ProtectedRoute>
-            <MyPurchaseList />
+            <MyPurchasePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/myaddeditem",
+        element: (
+          <ProtectedRoute>
+            <MyAddedFoodItem />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/purchase",
+        element: (
+          <ProtectedRoute>
+            <FoodPurchaseForm />
           </ProtectedRoute>
         ),
       },

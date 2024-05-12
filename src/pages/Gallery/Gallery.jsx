@@ -1,9 +1,10 @@
 import { Helmet } from "react-helmet-async";
 import useAuthHooks from "../../hooks/useAuthHooks";
+import "./Gallery.css";
 
 const Gallery = () => {
   const { user } = useAuthHooks();
-  
+
   // handleAddExperience
   const handleAddExperience = (e) => {
     e.preventDefault();
@@ -46,6 +47,139 @@ const Gallery = () => {
           </button>
         </div>
 
+        <div className="sectionTitle text-center max-w-3xl mx-auto space-y-3 mb-5 p-5">
+          <h1 className="text-4xl font-bold">Food-Gallery</h1>
+          <p className="font-medium">
+            Embark on a gastronomic journey with our exclusive selection of
+            top-tier dishes, meticulously crafted to captivate your senses and
+            palate.
+          </p>
+        </div>
+
+        {/* images-gallery */}
+        <div className="gallery_container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto gap-5 mb-10">
+          {/* item-1 */}
+          <div className="item w-full h-[170px] lg:h-[210px] border-4 border-[#4D4C7D] rounded-lg">
+            <img
+              className="gallery_img object-cover w-full h-full"
+              src="https://images.pexels.com/photos/397913/pexels-photo-397913.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt=""
+            />
+            <div className="overlay">
+              <h2 className="text-lg font-bold mb-2">User Name</h2>
+              <p className="text-sm font-medium text-center">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+                minima
+              </p>
+            </div>
+          </div>
+          {/* item-1 */}
+          <div className="item w-full h-[170px] lg:h-[210px] border-4 border-[#4D4C7D] rounded-lg">
+            <img
+              className="gallery_img object-cover w-full h-full"
+              src="https://images.pexels.com/photos/397913/pexels-photo-397913.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt=""
+            />
+            <div className="overlay">
+              <h2 className="text-lg font-bold mb-2">User Name</h2>
+              <p className="text-sm font-medium text-center">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+                minima
+              </p>
+            </div>
+          </div>
+          {/* item-1 */}
+          <div className="item w-full h-[170px] lg:h-[210px] border-4 border-[#4D4C7D] rounded-lg">
+            <img
+              className="gallery_img object-cover w-full h-full"
+              src="https://images.pexels.com/photos/397913/pexels-photo-397913.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt=""
+            />
+            <div className="overlay">
+              <h2 className="text-lg font-bold mb-2">User Name</h2>
+              <p className="text-sm font-medium text-center">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+                minima
+              </p>
+            </div>
+          </div>
+          {/* item-1 */}
+          <div className="item w-full h-[170px] lg:h-[210px] border-4 border-[#4D4C7D] rounded-lg">
+            <img
+              className="gallery_img object-cover w-full h-full"
+              src="https://images.pexels.com/photos/397913/pexels-photo-397913.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt=""
+            />
+            <div className="overlay">
+              <h2 className="text-lg font-bold mb-2">User Name</h2>
+              <p className="text-sm font-medium text-center">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+                minima
+              </p>
+            </div>
+          </div>
+          {/* item-1 */}
+          <div className="item w-full h-[170px] lg:h-[210px] border-4 border-[#4D4C7D] rounded-lg">
+            <img
+              className="gallery_img object-cover w-full h-full"
+              src="https://images.pexels.com/photos/397913/pexels-photo-397913.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt=""
+            />
+            <div className="overlay">
+              <h2 className="text-lg font-bold mb-2">User Name</h2>
+              <p className="text-sm font-medium text-center">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+                minima
+              </p>
+            </div>
+          </div>
+          {/* item-1 */}
+          <div className="item w-full h-[170px] lg:h-[210px] border-4 border-[#4D4C7D] rounded-lg">
+            <img
+              className="gallery_img object-cover w-full h-full"
+              src="https://images.pexels.com/photos/397913/pexels-photo-397913.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt=""
+            />
+            <div className="overlay">
+              <h2 className="text-lg font-bold mb-2">User Name</h2>
+              <p className="text-sm font-medium text-center">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+                minima
+              </p>
+            </div>
+          </div>
+          {/* item-1 */}
+          <div className="item w-full h-[170px] lg:h-[210px] border-4 border-[#4D4C7D] rounded-lg">
+            <img
+              className="gallery_img object-cover w-full h-full"
+              src="https://images.pexels.com/photos/397913/pexels-photo-397913.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt=""
+            />
+            <div className="overlay">
+              <h2 className="text-lg font-bold mb-2">User Name</h2>
+              <p className="text-sm font-medium text-center">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+                minima
+              </p>
+            </div>
+          </div>
+          {/* item-1 */}
+          <div className="item w-full h-[170px] lg:h-[210px] border-4 border-[#4D4C7D] rounded-lg">
+            <img
+              className="gallery_img object-cover w-full h-full"
+              src="https://images.pexels.com/photos/397913/pexels-photo-397913.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt=""
+            />
+            <div className="overlay">
+              <h2 className="text-lg font-bold mb-2">User Name</h2>
+              <p className="text-sm font-medium text-center">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+                minima
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* modal_area */}
 
         <dialog id="my_modal" className="modal">
@@ -59,15 +193,13 @@ const Gallery = () => {
 
             {/* user-input-form */}
             <div>
-              <div className="w-full max-w-md p-8 space-y-3 rounded-xl">
+              <div className="w-full max-w-md p-2 md:p-8 space-y-3 rounded-xl">
                 <h1 className="text-2xl font-bold text-center">
                   Add-Food-experience
                 </h1>
                 <form onSubmit={handleAddExperience} className="space-y-6">
                   <div className="space-y-1 text-sm">
-                    <label htmlFor="username" className="block text-gray-400">
-                      Username
-                    </label>
+                    <label className="block text-gray-400">Username</label>
                     <input
                       type="text"
                       name="name"
@@ -77,10 +209,9 @@ const Gallery = () => {
                       className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
                     />
                   </div>
+
                   <div className="space-y-1 text-sm">
-                    <label htmlFor="password" className="block text-gray-400">
-                      Feedback
-                    </label>
+                    <label className="block text-gray-400">Feedback</label>
                     <input
                       type="text"
                       name="feedback"
@@ -88,10 +219,9 @@ const Gallery = () => {
                       className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
                     />
                   </div>
+
                   <div className="space-y-1 text-sm">
-                    <label htmlFor="password" className="block text-gray-400">
-                      Photo URL
-                    </label>
+                    <label className="block text-gray-400">Photo URL</label>
                     <input
                       type="text"
                       name="photo"
@@ -99,6 +229,7 @@ const Gallery = () => {
                       className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
                     />
                   </div>
+
                   <button
                     type="submit"
                     className="block w-full p-3 text-center rounded-sm text-white bg-[#4D4C7D]"
