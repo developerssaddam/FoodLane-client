@@ -1,7 +1,24 @@
 import { Helmet } from "react-helmet-async";
 import { FaRegEdit } from "react-icons/fa";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuthHooks from "../../hooks/useAuthHooks";
+import { useEffect, useState } from "react";
 
 const MyAddedFoodItem = () => {
+  const { user } = useAuthHooks();
+  const axiosSecure = useAxiosSecure();
+  const userEmail = user.email;
+  const [addedFood, setAddedFood] = useState([]);
+
+  const url = `/food/my/added?email=${userEmail}`;
+
+  // Load specific user data
+  useEffect(() => {
+    axiosSecure.get(url).then((res) => {
+      setAddedFood(res.data);
+    });
+  }, [axiosSecure, userEmail, url]);
+
   return (
     <div>
       {" "}
@@ -29,34 +46,35 @@ const MyAddedFoodItem = () => {
             </tr>
           </thead>
           <tbody>
-            {/* row 1 */}
-            <tr className="bg-gray-200">
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+            {addedFood.map((food, index) => (
+              <tr key={index} className="bg-gray-200">
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img
+                          src={food.photo}
+                          alt="Avatar Tailwind CSS Component"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-              <td>Burger</td>
-              <td>$120</td>
-              <td>Md Saddam hossen</td>
-              <th>
-                <button
-                  className="btn btn-warning btn-sm text-white"
-                  onClick={() =>
-                    document.getElementById("my_modal").showModal()
-                  }
-                >
-                  <FaRegEdit />
-                </button>
-              </th>
-            </tr>
+                </td>
+                <td>{food.name}</td>
+                <td>$ {food.price}</td>
+                <td>{food.userName}</td>
+                <th>
+                  <button
+                    className="btn btn-warning btn-sm text-white"
+                    onClick={() =>
+                      document.getElementById("my_modal").showModal()
+                    }
+                  >
+                    <FaRegEdit />
+                  </button>
+                </th>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -73,14 +91,10 @@ const MyAddedFoodItem = () => {
           {/* Update-form */}
           <div>
             <div className="w-full max-w-md p-2 md:p-8 space-y-3 rounded-xl">
-              <h1 className="text-2xl font-bold text-center">
-                Update
-              </h1>
+              <h1 className="text-2xl font-bold text-center">Update</h1>
               <form className="space-y-6">
                 <div className="space-y-1 text-sm">
-                  <label className="block text-gray-400">
-                    Photo
-                  </label>
+                  <label className="block text-gray-400">Photo</label>
                   <input
                     type="text"
                     name="photo"
@@ -90,9 +104,7 @@ const MyAddedFoodItem = () => {
                 </div>
 
                 <div className="space-y-1 text-sm">
-                  <label className="block text-gray-400">
-                    Food Name
-                  </label>
+                  <label className="block text-gray-400">Food Name</label>
                   <input
                     type="text"
                     name="name"
@@ -102,9 +114,7 @@ const MyAddedFoodItem = () => {
                 </div>
 
                 <div className="space-y-1 text-sm">
-                  <label className="block text-gray-400">
-                    Price
-                  </label>
+                  <label className="block text-gray-400">Price</label>
                   <input
                     type="text"
                     name="price"
