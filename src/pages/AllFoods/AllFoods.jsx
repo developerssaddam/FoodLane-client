@@ -2,8 +2,19 @@ import { Helmet } from "react-helmet-async";
 import "./AllFoods.css";
 import AllFoodCard from "./AllFoodCard";
 import { IoSearchSharp } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AllFoods = () => {
+  const axiosSecure = useAxiosSecure();
+  const [allFoods, setAllFoods] = useState([]);
+
+  useEffect(() => {
+    axiosSecure.get("/allfoods").then((res) => {
+      setAllFoods(res.data);
+    });
+  }, [axiosSecure]);
+
   // handleSearch
   const handleSearch = () => {
     const inputTag = document.getElementById("search");
@@ -51,23 +62,10 @@ const AllFoods = () => {
           </div>
         </div>
 
-        <div className="allFoodCardContainer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto gap-8">
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
-          <AllFoodCard />
+        <div className="allFoodCardContainer grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto gap-8 mb-8">
+          {allFoods.map((food, index) => (
+            <AllFoodCard key={index} food={food} />
+          ))}
         </div>
       </div>
     </div>

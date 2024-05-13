@@ -159,7 +159,7 @@ const AddFoodItem = () => {
             <input
               type="submit"
               value="Add-Now"
-              className="bg-[#4D4C7D] w-full text-white py-3"
+              className="bg-[#4D4C7D] w-full text-white py-3 cursor-pointer"
             />
           </div>
         </form>
