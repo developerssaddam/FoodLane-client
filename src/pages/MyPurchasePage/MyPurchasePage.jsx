@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet-async";
 import { FaRegTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuthHooks from "../../hooks/useAuthHooks";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const MyPurchasePage = () => {
   const axiosSecure = useAxiosSecure();
@@ -10,6 +12,41 @@ const MyPurchasePage = () => {
   const userEmail = user.email;
   const url = `/food/my/purchase?email=${userEmail}`;
   const [purchaseFoods, setPurchaseFoods] = useState([]);
+
+  // handleDeletePurchaseItem
+  const handleDeletePurchaseItem = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/food/my/purchase/remove?id=${id}`)
+          .then((res) => {
+            if (res.data.acknowledged) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your food has been deleted.",
+                icon: "success",
+              });
+
+              const remainingFoods = purchaseFoods.filter(
+                (food) => food._id !== id
+              );
+              setPurchaseFoods(remainingFoods);
+            }
+          })
+          .catch((error) => {
+            toast.error(error.message);
+          });
+      }
+    });
+  };
 
   // Load specific user data
   useEffect(() => {
@@ -65,7 +102,10 @@ const MyPurchasePage = () => {
                 <td>{food.time}</td>
                 <td>{food.buyerName}</td>
                 <th>
-                  <button className="btn btn-error btn-sm text-white">
+                  <button
+                    onClick={() => handleDeletePurchaseItem(food._id)}
+                    className="btn btn-error btn-sm text-white"
+                  >
                     <FaRegTrashAlt />
                   </button>
                 </th>
