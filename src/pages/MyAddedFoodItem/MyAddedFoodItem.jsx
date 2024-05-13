@@ -3,14 +3,51 @@ import { FaRegEdit } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuthHooks from "../../hooks/useAuthHooks";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const MyAddedFoodItem = () => {
   const { user } = useAuthHooks();
   const axiosSecure = useAxiosSecure();
   const userEmail = user.email;
   const [addedFood, setAddedFood] = useState([]);
-
+  const [clickedCurrentFood, setClickedCurrentFood] = useState({});
   const url = `/food/my/added?email=${userEmail}`;
+
+  // handleUpdateAddedItem
+  const handleUpdateAddedItem = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const photo = form.photo.value;
+    const name = form.name.value;
+    const price = form.price.value;
+    const quantity = form.quantity.value;
+
+    const updatedData = {
+      id: clickedCurrentFood._id,
+      userName: clickedCurrentFood.userName,
+      photo,
+      name,
+      price,
+      quantity,
+    };
+
+    axiosSecure
+      .put("/food/myadded/update", updatedData)
+      .then((res) => {
+        if (res.data.acknowledged) {
+          const remainingFood = addedFood.filter(
+            (food) => food._id !== clickedCurrentFood._id
+          );
+          const updatedFood = updatedData;
+          const newAddedFood = [updatedFood, ...remainingFood];
+          setAddedFood(newAddedFood);
+          toast.success("Updated successfull!");
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
   // Load specific user data
   useEffect(() => {
@@ -41,6 +78,7 @@ const MyAddedFoodItem = () => {
               <th>Images</th>
               <th>Name</th>
               <th>Price</th>
+              <th>Quantity</th>
               <th>Owner</th>
               <th>Actions</th>
             </tr>
@@ -62,13 +100,15 @@ const MyAddedFoodItem = () => {
                 </td>
                 <td>{food.name}</td>
                 <td>$ {food.price}</td>
+                <td>{food.quantity}</td>
                 <td>{food.userName}</td>
                 <th>
                   <button
                     className="btn btn-warning btn-sm text-white"
-                    onClick={() =>
-                      document.getElementById("my_modal").showModal()
-                    }
+                    onClick={() => {
+                      document.getElementById("my_modal").showModal();
+                      setClickedCurrentFood(food);
+                    }}
                   >
                     <FaRegEdit />
                   </button>
@@ -92,12 +132,13 @@ const MyAddedFoodItem = () => {
           <div>
             <div className="w-full max-w-md p-2 md:p-8 space-y-3 rounded-xl">
               <h1 className="text-2xl font-bold text-center">Update</h1>
-              <form className="space-y-6">
+              <form onSubmit={handleUpdateAddedItem} className="space-y-6">
                 <div className="space-y-1 text-sm">
                   <label className="block text-gray-400">Photo</label>
                   <input
                     type="text"
                     name="photo"
+                    defaultValue={clickedCurrentFood.photo}
                     placeholder="Photo URL"
                     className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
                   />
@@ -108,6 +149,7 @@ const MyAddedFoodItem = () => {
                   <input
                     type="text"
                     name="name"
+                    defaultValue={clickedCurrentFood.name}
                     placeholder="Food Name"
                     className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
                   />
@@ -118,7 +160,18 @@ const MyAddedFoodItem = () => {
                   <input
                     type="text"
                     name="price"
+                    defaultValue={clickedCurrentFood.price}
                     placeholder="Price"
+                    className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
+                  />
+                </div>
+                <div className="space-y-1 text-sm">
+                  <label className="block text-gray-400">Quantity</label>
+                  <input
+                    type="text"
+                    name="quantity"
+                    defaultValue={clickedCurrentFood.quantity}
+                    placeholder="Quantity"
                     className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
                   />
                 </div>
