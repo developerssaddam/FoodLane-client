@@ -33,11 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/allfoods",
-        element: (
-          <ProtectedRoute>
-            <AllFoods />
-          </ProtectedRoute>
-        ),
+        element: <AllFoods />,
       },
       {
         path: "/gallery",
