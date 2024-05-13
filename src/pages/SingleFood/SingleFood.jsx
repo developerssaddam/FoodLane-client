@@ -7,7 +7,7 @@ const SingleFood = () => {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const [food, setFood] = useState({});
-  const { name, photo, category, price, desc, country, userName } = food;
+  const { _id, name, photo, category, price, desc, country, userName } = food;
 
   useEffect(() => {
     axiosSecure.get(`/food/${id}`).then((res) => {
@@ -61,7 +61,7 @@ const SingleFood = () => {
             <p>{desc}</p>
 
             <div className="flex justify-end">
-              <Link to="/purchase">
+              <Link to={`/purchase/${_id}`}>
                 <button className="bg-[#4D4C7D] text-white btn px-8">
                   Purchase
                 </button>

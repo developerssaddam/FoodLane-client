@@ -68,7 +68,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/purchase",
+        path: "/purchase/:id",
         element: (
           <ProtectedRoute>
             <FoodPurchaseForm />
