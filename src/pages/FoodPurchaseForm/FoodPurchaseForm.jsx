@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuthHooks from "../../hooks/useAuthHooks";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 const FoodPurchaseForm = () => {
   const axiosSecure = useAxiosSecure();
@@ -12,7 +13,7 @@ const FoodPurchaseForm = () => {
   const navigate = useNavigate();
 
   const [currentFood, setCurrentFood] = useState({});
-  const { _id, name, price, count } = currentFood;
+  const { _id, name, price, count, userEmail, photo } = currentFood;
 
   // CurrentFood Data loaded
   useEffect(() => {
@@ -39,8 +40,14 @@ const FoodPurchaseForm = () => {
       quantity,
       buyerName,
       buyerEmail,
-      time: Date.now(),
+      photo,
+      time: moment().format('YYYY/MM/D hh:mm')
     };
+
+    // if the user added this food items
+    if (user.email === userEmail) {
+      return toast.warn("You can not buy your own item!");
+    }
 
     // Validation quantity
     if (currentQuantity === 0) {

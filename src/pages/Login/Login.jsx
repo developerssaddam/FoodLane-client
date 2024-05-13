@@ -9,7 +9,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(true);
-  const { user, loginUser, loginWithGoogle, loginWithGithub } = useAuthHooks();
+  const { loginUser, loginWithGoogle, loginWithGithub } = useAuthHooks();
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
@@ -33,7 +33,7 @@ const Login = () => {
     }
     loginUser(email, password)
       .then(() => {
-        axiosSecure.post("/user", user).then((res) => {
+        axiosSecure.post("/user", { email }).then((res) => {
           if (res.data.status) {
             toast.success("Login successfull!");
             location?.state ? navigate(location.state) : navigate("/");
@@ -49,8 +49,9 @@ const Login = () => {
   // Social Login.
   const socialLogin = (loginMethods) => {
     loginMethods()
-      .then(() => {
-        axiosSecure.post("/user", user).then((res) => {
+      .then((result) => {
+        const email = result.user.email;
+        axiosSecure.post("/user", { email }).then((res) => {
           if (res.data.status) {
             toast.success("Login successfull!");
             location?.state ? navigate(location.state) : navigate("/");

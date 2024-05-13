@@ -27,23 +27,27 @@ const AuthProviders = ({ children }) => {
 
   // LoginUser
   const loginUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // LoginWithGoogle
   const loginWithGoogle = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   // Login WithGithub
   const loginWithGithub = () => {
+    setLoading(true);
     return signInWithPopup(auth, gitHubProvider);
   };
 
   // LogoutUser
   const logoutUser = () => {
-    return signOut(auth)
-  }
+    setLoading(true);
+    return signOut(auth);
+  };
 
   // Observation function
   useEffect(() => {
@@ -63,7 +67,7 @@ const AuthProviders = ({ children }) => {
     loginUser,
     loginWithGoogle,
     loginWithGithub,
-    logoutUser
+    logoutUser,
   };
 
   return (
