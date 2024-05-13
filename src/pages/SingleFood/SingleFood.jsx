@@ -1,7 +1,20 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
 
 const SingleFood = () => {
+  const axiosSecure = useAxiosSecure();
+  const { id } = useParams();
+  const [food, setFood] = useState({});
+  const { name, photo, category, price, desc, country, userName } = food;
+
+  useEffect(() => {
+    axiosSecure.get(`/food/${id}`).then((res) => {
+      setFood(res.data);
+    });
+  }, [axiosSecure, id]);
+
   return (
     <div>
       <Helmet>
@@ -26,33 +39,26 @@ const SingleFood = () => {
           <div>
             <img
               className="w-full max-h-[350px] object-cover rounded-md"
-              src="https://thumbs.dreamstime.com/b/young-people-eating-sushi-restaurant-asian-44693451.jpg?w=768"
+              src={photo}
               alt=""
             />
           </div>
 
           <div className="my-10 space-y-3 font_lato p-2">
-            <h2 className="text-2xl font-bold font_lobster">Food Name</h2>
+            <h2 className="text-2xl font-bold font_lobster">Name : {name}</h2>
             <div className="flex flex-col md:flex-row gap-4 md:justify-between">
-              <h2 className="text-lg font-semibold">Category : Category</h2>
+              <h2 className="text-lg font-semibold">Category : {category}</h2>
               <p className="text-lg font-semibold">
-                Price : <span className="font_lobster">$120</span>
+                Price : <span className="font_lobster">$ {price}</span>
               </p>
             </div>
             <div className="flex flex-col md:flex-row gap-4 md:justify-between">
               <h2 className="text-lg font-semibold">
-                Made-By : <span>Made by</span>
+                Made-By : <span>{userName}</span>
               </h2>
-              <h2 className="text-lg font-semibold">Country : Country</h2>
+              <h2 className="text-lg font-semibold">Country : {country}</h2>
             </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum,
-              pariatur. Consequuntur vero at, atque veniam asperiores architecto
-              excepturi sapiente sunt, eligendi inventore dolor mollitia eveniet
-              non rem! Deleniti perspiciatis sapiente magni error. Saepe
-              officiis aliquam ut laboriosam repellat magnam vero ab autem, non
-              excepturi sit exercitationem, reiciendis quidem sint omnis.
-            </p>
+            <p>{desc}</p>
 
             <div className="flex justify-end">
               <Link to="/purchase">
