@@ -18,17 +18,19 @@ const TopFoodCardContainer = () => {
   return (
     <div className="my-16">
       <div className="sectionTitle text-center max-w-3xl mx-auto space-y-3 mb-5 p-5">
-        <h1 className="text-4xl font-bold">Top-Foods</h1>
-        <p className="font-medium">
+        <h1 className="text-4xl font-semibold font_lobster">
+          Top-Foods-Section
+        </h1>
+        <p className="font-medium text-gray-500">
           Embark on a gastronomic journey with our exclusive selection of
           top-tier dishes, meticulously crafted to captivate your senses and
           palate.
         </p>
       </div>
       <div className="cardContainer max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-       {
-        topFoods.map((food, index) => <TopFoodCard key={index} food={food}/>)
-       }
+        {topFoods.map((food, index) => (
+          <TopFoodCard key={index} food={food} />
+        ))}
       </div>
 
       <div className="flex justify-center mt-12">

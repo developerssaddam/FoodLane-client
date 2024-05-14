@@ -12,7 +12,7 @@ const NavBar = () => {
   const handleLogoutUser = () => {
     logoutUser()
       .then(() => {
-        axiosSecure.get("/user/logout").then((res) => {
+        axiosSecure.post("/user/logout").then((res) => {
           toast.success(res.data.message);
         });
       })

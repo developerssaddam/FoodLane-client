@@ -47,8 +47,6 @@ const Gallery = () => {
           const currentData = newFeedback;
           const newAllData = [currentData, ...allData];
           setAllData(newAllData);
-
-          document.getElementById("my_modal").open = false;
           form.reset();
           navigate("/gallery");
           toast.success("Successfully added your feedback!");
@@ -139,13 +137,6 @@ const Gallery = () => {
         {/* modal_area */}
         <dialog id="my_modal" className="modal">
           <div className="modal-box">
-            {/* close-modal-form */}
-            <form method="dialog">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-            </form>
-
             {/* user-input-form */}
             <div>
               <div className="w-full max-w-md p-2 md:p-8 space-y-3 rounded-xl">
@@ -195,6 +186,9 @@ const Gallery = () => {
               </div>
             </div>
           </div>
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form>
         </dialog>
       </div>
     </div>

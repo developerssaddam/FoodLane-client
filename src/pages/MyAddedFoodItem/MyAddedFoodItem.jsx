@@ -41,7 +41,6 @@ const MyAddedFoodItem = () => {
           const updatedFood = updatedData;
           const newAddedFood = [updatedFood, ...remainingFood];
           setAddedFood(newAddedFood);
-          document.getElementById("my_modal").open = false;
           toast.success("Updated successfull!");
         }
       })
@@ -122,7 +121,6 @@ const MyAddedFoodItem = () => {
       {/* modal_area */}
       <dialog id="my_modal" className="modal">
         <div className="modal-box">
-
           {/* Update-form */}
           <div>
             <div className="w-full max-w-md p-2 md:p-8 space-y-3 rounded-xl">
@@ -160,7 +158,7 @@ const MyAddedFoodItem = () => {
                     className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
                   />
                 </div>
-                
+
                 <div className="space-y-1 text-sm">
                   <label className="block text-gray-400">Quantity</label>
                   <input

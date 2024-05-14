@@ -6,12 +6,14 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
 import useAuthHooks from "../../hooks/useAuthHooks";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(true);
   const { createUser } = useAuthHooks();
   const passCheck = /(?=.*[A-Z])(?=.*[a-z]){6,}/;
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   // handleShowHidePassword
   const handleShowHidePassword = () => {
@@ -27,6 +29,12 @@ const Register = () => {
     const email = form.email.value;
     const photo = form.photo.value;
     const password = form.password.value;
+
+    const user = {
+      name,
+      email,
+      photo,
+    };
 
     // form validation
     if (!name || !email || !photo || !password) {
@@ -48,7 +56,11 @@ const Register = () => {
           photoURL: photo,
         })
           .then(() => {
-            toast.success("User registration successfull!");
+            axiosSecure.post("/foodlane/users", user).then((res) => {
+              if (res.data.acknowledged) {
+                toast.success("User registration successfull!");
+              }
+            });
           })
           .catch((error) => {
             toast.error(error.message);
