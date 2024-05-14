@@ -41,6 +41,7 @@ const MyAddedFoodItem = () => {
           const updatedFood = updatedData;
           const newAddedFood = [updatedFood, ...remainingFood];
           setAddedFood(newAddedFood);
+          document.getElementById("my_modal").open = false;
           toast.success("Updated successfull!");
         }
       })

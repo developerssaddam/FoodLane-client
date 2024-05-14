@@ -16,9 +16,10 @@
   align-items: center;
   color: #fff;
   flex-direction: column;
+  z-index: 99;
 }
 
 .overlay:hover {
-  opacity: 0.6;
-  box-shadow: 5px 5px 2px rgb(183, 28, 222)
+  opacity: 0.5;
+  box-shadow: 5px 5px 2px rgb(204, 174, 212)
 }
