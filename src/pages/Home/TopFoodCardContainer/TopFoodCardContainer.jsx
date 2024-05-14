@@ -1,8 +1,20 @@
 import { Link } from "react-router-dom";
 import TopFoodCard from "../../../components/TopFoodCard/TopFoodCard";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const TopFoodCardContainer = () => {
+  const axiosSecure = useAxiosSecure();
+  const [topFoods, setTopFoods] = useState([]);
+
+  // Load top selling food item
+  useEffect(() => {
+    axiosSecure.get("/allfoods/count").then((res) => {
+      setTopFoods(res.data);
+    });
+  }, [axiosSecure]);
+
   return (
     <div className="my-16">
       <div className="sectionTitle text-center max-w-3xl mx-auto space-y-3 mb-5 p-5">
@@ -14,13 +26,9 @@ const TopFoodCardContainer = () => {
         </p>
       </div>
       <div className="cardContainer max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {/* item-1 */}
-        <TopFoodCard />
-        <TopFoodCard />
-        <TopFoodCard />
-        <TopFoodCard />
-        <TopFoodCard />
-        <TopFoodCard />
+       {
+        topFoods.map((food, index) => <TopFoodCard key={index} food={food}/>)
+       }
       </div>
 
       <div className="flex justify-center mt-12">

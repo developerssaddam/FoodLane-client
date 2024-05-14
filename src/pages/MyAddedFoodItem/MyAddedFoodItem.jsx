@@ -121,12 +121,6 @@ const MyAddedFoodItem = () => {
       {/* modal_area */}
       <dialog id="my_modal" className="modal">
         <div className="modal-box">
-          {/* close-modal-form */}
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
-            </button>
-          </form>
 
           {/* Update-form */}
           <div>
@@ -165,6 +159,7 @@ const MyAddedFoodItem = () => {
                     className="w-full px-4 py-3 rounded-md border-2 focus:border-violet-400"
                   />
                 </div>
+                
                 <div className="space-y-1 text-sm">
                   <label className="block text-gray-400">Quantity</label>
                   <input
@@ -186,6 +181,9 @@ const MyAddedFoodItem = () => {
             </div>
           </div>
         </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
       </dialog>
     </div>
   );

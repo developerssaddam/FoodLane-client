@@ -4,6 +4,7 @@ import AllFoodCard from "./AllFoodCard";
 import { IoSearchSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const AllFoods = () => {
   const axiosSecure = useAxiosSecure();
@@ -18,8 +19,16 @@ const AllFoods = () => {
   // handleSearch
   const handleSearch = () => {
     const inputTag = document.getElementById("search");
-    const inputValue = inputTag.value;
-    console.log(inputValue);
+    const value = inputTag.value.trim();
+    const inputValue = value.split("")[0].toUpperCase() + value.slice(1);
+    axiosSecure
+      .get(`/allfood/search?name=${inputValue}`)
+      .then((res) => {
+        setAllFoods(res.data);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   return (
