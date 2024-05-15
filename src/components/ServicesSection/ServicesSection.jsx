@@ -24,7 +24,7 @@ const ServicesSection = () => {
         </p>
       </div>
 
-      <div className="flex gap-8 lg:justify-between flex-col lg:flex-row max-w-7xl mx-auto mb-16">
+      <div className="flex gap-8 lg:gap-5 flex-col lg:flex-row max-w-7xl mx-auto mb-16">
         <div className="w-full lg:w-3/4 hidden lg:block">
           <Swiper
             modules={[Navigation, Scrollbar, A11y, EffectFade, Autoplay]}
