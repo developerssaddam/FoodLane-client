@@ -9,14 +9,28 @@ import { toast } from "react-toastify";
 const AllFoods = () => {
   const axiosSecure = useAxiosSecure();
   const [allFoods, setAllFoods] = useState([]);
+  const [totalFood, setTotalFood] = useState(0);
+  const totalFoodsPerPage = 9;
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    axiosSecure.get("/allfoods").then((res) => {
-      setAllFoods(res.data);
-    });
-  }, [axiosSecure]);
+    // axiosSecure.get("/allfoods").then((res) => {
+    //   setAllFoods(res.data);
+    // });
 
-  // handleSearch
+    // get total data number
+    axiosSecure.get("/count/allfoods").then((res) => {
+      setTotalFood(res.data.totalFood);
+    });
+
+    // load data perpage nine.
+    axiosSecure
+      .get(`/foods/pagination/?page=${currentPage}&size=${totalFoodsPerPage}`)
+      .then((res) => {
+        setAllFoods(res.data);
+      });
+  }, [axiosSecure, currentPage, totalFoodsPerPage]);
+
   const handleSearch = () => {
     const inputTag = document.getElementById("search");
     const value = inputTag.value.trim();
@@ -29,6 +43,30 @@ const AllFoods = () => {
       .catch((error) => {
         toast.error(error.message);
       });
+  };
+
+  // Paginations
+  const totalNumberOfFoods = totalFood;
+  const pages = Math.ceil(totalNumberOfFoods / totalFoodsPerPage);
+  const totalPages = [...Array(pages).keys()];
+
+  // handleCurrentPage
+  const handleCurrentPage = (page) => {
+    setCurrentPage(page);
+  };
+
+  // handlePrevButton
+  const handlePrevButton = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // handleNextButton
+  const handleNextButton = () => {
+    if (currentPage < totalPages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   return (
@@ -75,6 +113,21 @@ const AllFoods = () => {
           {allFoods.map((food, index) => (
             <AllFoodCard key={index} food={food} />
           ))}
+        </div>
+
+        {/* Paginations */}
+        <div className="pagination_area flex justify-center items-center py-3 bg-[#b1c2d2]">
+          <button onClick={handlePrevButton}>Prev</button>
+          {totalPages.map((page, index) => (
+            <button
+              onClick={() => handleCurrentPage(page)}
+              className={currentPage === page ? "selected" : ""}
+              key={index}
+            >
+              {page}
+            </button>
+          ))}
+          <button onClick={handleNextButton}>Next</button>
         </div>
       </div>
     </div>
