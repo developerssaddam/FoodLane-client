@@ -77,7 +77,7 @@ const MyPurchasePage = () => {
               <th>Images</th>
               <th>Name</th>
               <th>Price</th>
-              <th>Added-Time</th>
+              <th>Buying Date</th>
               <th>Owner</th>
               <th>Actions</th>
             </tr>
