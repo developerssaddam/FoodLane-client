@@ -12,6 +12,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import MyPurchasePage from "../pages/MyPurchasePage/MyPurchasePage";
 import MyAddedFoodItem from "../pages/MyAddedFoodItem/MyAddedFoodItem";
 import FoodPurchaseForm from "../pages/FoodPurchaseForm/FoodPurchaseForm";
+import Payment from "../pages/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,11 @@ const router = createBrowserRouter([
             <FoodPurchaseForm />
           </ProtectedRoute>
         ),
+      },
+
+      {
+        path: "/payment",
+        element: <Payment />,
       },
     ],
   },

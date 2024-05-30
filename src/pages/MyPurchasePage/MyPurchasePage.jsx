@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuthHooks from "../../hooks/useAuthHooks";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const MyPurchasePage = () => {
   const axiosSecure = useAxiosSecure();
@@ -68,6 +69,13 @@ const MyPurchasePage = () => {
           top-tier dishes, meticulously crafted to captivate your senses and
           palate.
         </p>
+      </div>
+      <div className="max-w-5xl mx-auto my-4 text-end">
+        <Link to="/payment">
+          <button className="btn btn-sm bg-[#4D4C7D] text-white">
+            Pay-Now
+          </button>
+        </Link>
       </div>
       <div className="overflow-x-auto max-w-5xl mx-auto mb-10">
         <table className="table">

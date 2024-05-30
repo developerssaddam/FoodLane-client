@@ -31,10 +31,10 @@ const AllFoods = () => {
       });
   }, [axiosSecure, currentPage, totalFoodsPerPage]);
 
+  // handleSearch
   const handleSearch = () => {
     const inputTag = document.getElementById("search");
-    const value = inputTag.value.trim();
-    const inputValue = value.split("")[0].toUpperCase() + value.slice(1);
+    const inputValue = inputTag.value.trim();
     axiosSecure
       .get(`/allfood/search?name=${inputValue}`)
       .then((res) => {

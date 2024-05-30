@@ -12,13 +12,8 @@ const AddFoodItem = () => {
     e.preventDefault();
 
     const form = e.target;
-    const nameFieldValue = form.name.value;
-    const name =
-      nameFieldValue.split("")[0].toUpperCase() + nameFieldValue.slice(1);
-    const categoryFieldValue = form.category.value;
-    const category =
-      categoryFieldValue.split("")[0].toUpperCase() +
-      categoryFieldValue.slice(1);
+    const name = form.name.value;
+    const category = form.category.value;
     const quantity = form.quantity.value;
     const price = form.price.value;
     const userName = form.userName.value;
