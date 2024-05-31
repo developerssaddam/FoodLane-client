@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaRegTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import useAuthHooks from "../../hooks/useAuthHooks";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import usePurchaseData from "../../hooks/usePurchaseData";
 
 const MyPurchasePage = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuthHooks();
-  const userEmail = user.email;
-  const url = `/food/my/purchase?email=${userEmail}`;
-  const [purchaseFoods, setPurchaseFoods] = useState([]);
+  const [purchaseFoods, refetch] = usePurchaseData();
 
   // handleDeletePurchaseItem
   const handleDeletePurchaseItem = (id) => {
@@ -35,11 +31,7 @@ const MyPurchasePage = () => {
                 text: "Your food has been deleted.",
                 icon: "success",
               });
-
-              const remainingFoods = purchaseFoods.filter(
-                (food) => food._id !== id
-              );
-              setPurchaseFoods(remainingFoods);
+              refetch();
             }
           })
           .catch((error) => {
@@ -48,13 +40,6 @@ const MyPurchasePage = () => {
       }
     });
   };
-
-  // Load specific user data
-  useEffect(() => {
-    axiosSecure.get(url).then((res) => {
-      setPurchaseFoods(res.data);
-    });
-  }, [axiosSecure, userEmail, url]);
 
   return (
     <div>

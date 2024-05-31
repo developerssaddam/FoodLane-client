@@ -13,6 +13,7 @@ import MyPurchasePage from "../pages/MyPurchasePage/MyPurchasePage";
 import MyAddedFoodItem from "../pages/MyAddedFoodItem/MyAddedFoodItem";
 import FoodPurchaseForm from "../pages/FoodPurchaseForm/FoodPurchaseForm";
 import Payment from "../pages/Payment/Payment";
+import PaymentHistory from "../pages/PaymentHistory/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,16 @@ const router = createBrowserRouter([
         path: "/food/:id",
         element: <SingleFood />,
       },
+
+      {
+        path: "/payment/history",
+        element: (
+          <ProtectedRoute>
+            <PaymentHistory />
+          </ProtectedRoute>
+        ),
+      },
+
       {
         path: "/food/add",
         element: (
